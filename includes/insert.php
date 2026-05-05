@@ -1,5 +1,5 @@
 <?php
-include 'db.php';
+include __DIR__ . '/db.php';
 
 // Sanitize inputs
 $name       = mysqli_real_escape_string($conn, $_POST['name']);
