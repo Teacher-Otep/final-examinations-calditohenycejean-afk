@@ -13,11 +13,11 @@ $sql = "INSERT INTO students (name, surname, middlename, address, contact_number
 
 // Run the query once and check if it was successful in one go
 if (mysqli_query($conn, $sql)) {
-    header('Location: ../index.php?status=success');
+    header('Location: ../index.php?status=success&section=create');
+    exit();
 } else {
-    header('Location: ../index.php?status=error');
+    header('Location: ../index.php?status=error&section=create');
+    exit();
 }
 
 mysqli_close($conn);
-exit(); // Good practice to stop script execution after a redirect
-?>
