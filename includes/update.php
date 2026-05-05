@@ -1,23 +1,23 @@
 <?php
 include 'db.php';
 
-// Sanitize inputs
+$id         = (int) $_POST['id'];
 $name       = mysqli_real_escape_string($conn, $_POST['name']);
 $surname    = mysqli_real_escape_string($conn, $_POST['surname']);
 $middlename = mysqli_real_escape_string($conn, $_POST['middlename']);
 $address    = mysqli_real_escape_string($conn, $_POST['address']);
 $contact    = mysqli_real_escape_string($conn, $_POST['contact']);
 
-$sql = "INSERT INTO students (name, surname, middlename, address, contact_number)
-        VALUES ('$name', '$surname', '$middlename', '$address', '$contact')";
+$sql = "UPDATE students
+        SET name='$name', surname='$surname', middlename='$middlename',
+            address='$address', contact_number='$contact'
+        WHERE id=$id";
 
-// Run the query once and check if it was successful in one go
 if (mysqli_query($conn, $sql)) {
-    header('Location: ../index.php?status=success');
+    header("Location: ../index.php?status=updated&section=update");
 } else {
-    header('Location: ../index.php?status=error');
+    header("Location: ../index.php?status=error&section=update");
 }
 
 mysqli_close($conn);
-exit(); // Good practice to stop script execution after a redirect
 ?>
